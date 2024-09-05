@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Social Media OSINT</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .search-box {
+            position: relative;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            width: 250px;
+            font-size: 1rem;
+            background: transparent;
+        }
+
+        .social-media-select {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .submit-btn {
+            margin-top: 15px;
+            padding: 10px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .social-logos {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-logos img {
+            width: 30px;
+            margin: 0 10px;
+            opacity: 0.8;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .footer a {
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="title">Social Media OSINT</h1>
+    
+    <div class="search-box">
+        <input type="text" id="username" placeholder="Enter Username">
+    </div>
+
+    <div>
+        <select class="social-media-select" id="platform">
+            <option value="instagram">Instagram</option>
+            <option value="twitter">Twitter</option>
+            <option value="facebook">Facebook</option>
+            <option value="tiktok">TikTok</option>
+            <option value="linkedin">LinkedIn</option>
+        </select>
+    </div>
+
+    <button class="submit-btn" onclick="performSearch()">Search</button>
+
+    <div class="social-logos">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI-h-e2hgz8mwGfCt4gvj4IgMG_wAUolVM6w&s" alt="Twitter">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+        <img src="https://static.wikia.nocookie.net/logopedia/images/0/08/TikTok_icon.svg" alt="TikTok">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+    </div>
+
+    <div class="footer">
+        Developed by <a href="https://www.instagram.com/humzaashraf1/" target="_blank">Hamza Ashraf</a>
+    </div>
+</div>
+
+<script>
+    function performSearch() {
+        // Get the entered username and selected platform
+        const username = document.getElementById('username').value;
+        const platform = document.getElementById('platform').value;
+
+        if (username === "") {
+            alert("Please enter a username.");
+            return;
+        }
+
+        let searchUrl = "";
+
+        // Create a search URL based on the platform
+        switch(platform) {
+            case 'instagram':
+                searchUrl = `https://www.google.com/search?q=site:instagram.com intext:"${username}"`;
+                break;
+            case 'twitter':
+                searchUrl = `https://www.google.com/search?q=site:twitter.com intext:"${username}"`;
+                break;
+            case 'facebook':
+                searchUrl = `https://www.google.com/search?q=site:facebook.com intext:"${username}"`;
+                break;
+            case 'tiktok':
+                searchUrl = `https://www.google.com/search?q=site:tiktok.com intext:"${username}"`;
+                break;
+            case 'linkedin':
+                searchUrl = `https://www.google.com/search?q=site:linkedin.com intext:"${username}"`;
+                break;
+            default:
+                alert("Invalid platform selected.");
+                return;
+        }
+
+        // Redirect to the search results in a new tab
+        window.open(searchUrl, '_blank');
+    }
+</script>
+
+</body>
+</html>
